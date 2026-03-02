@@ -882,6 +882,618 @@ body {
   color: var(--text);
 }
 
+/* ── THEORIES PAGE ── */
+.theory-intro {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text2);
+  margin-bottom: 24px;
+}
+
+.theory-section {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.theory-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.theory-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text2);
+  margin-bottom: 16px;
+}
+
+/* Golden Ratio */
+.golden-spiral-demo {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  background: rgba(0, 113, 227, 0.02);
+  border: 1px solid rgba(0, 113, 227, 0.08);
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 16px;
+}
+
+.golden-svg {
+  max-width: 340px;
+  width: 100%;
+}
+
+.golden-legend {
+  flex: 1;
+}
+
+.golden-ratio-badge {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 8px;
+  font-family: 'SF Mono', monospace;
+}
+
+/* Theory Tips Grid */
+.theory-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.theory-tip-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.theory-tip-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.theory-tip-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.theory-tip-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.theory-tip-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text2);
+}
+
+/* Rule of Thirds */
+.thirds-demo {
+  margin-top: 16px;
+  max-width: 500px;
+}
+
+.thirds-grid {
+  position: relative;
+  width: 100%;
+  padding-bottom: 66%;
+  background: rgba(0, 113, 227, 0.03);
+  border: 1px solid rgba(0, 113, 227, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.thirds-line {
+  position: absolute;
+  background: rgba(0, 113, 227, 0.15);
+}
+
+.thirds-h {
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.thirds-v {
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+
+.thirds-point {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--blue);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+}
+
+.thirds-label {
+  position: absolute;
+  font-size: 14px;
+  transform: translate(-50%, -50%);
+}
+
+/* Color Wheel */
+.color-wheel-demo {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.color-wheel-svg {
+  max-width: 240px;
+  width: 100%;
+}
+
+/* Harmony Grid */
+.harmony-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.harmony-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.harmony-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.harmony-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.harmony-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.harmony-swatches {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.h-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.harmony-use {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 500;
+}
+
+/* Psychology Grid */
+.psych-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.psych-card {
+  text-align: center;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px 14px;
+  transition: all 0.2s;
+}
+
+.psych-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.psych-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.psych-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.psych-emotions {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.psych-usage {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  opacity: 0.7;
+}
+
+/* 60-30-10 Rule */
+.rule-demo {
+  margin-top: 16px;
+}
+
+.rule-bar {
+  display: flex;
+  height: 56px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.rule-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.rule-segment span {
+  font-size: 14px;
+}
+
+.rule-segment small {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.rule-60 {
+  background: #F5F5F7;
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+
+.rule-30 {
+  background: #1D1D1F;
+  color: white;
+}
+
+.rule-10 {
+  background: var(--blue);
+  color: white;
+}
+
+.rule-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text2);
+}
+
+.rule-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+/* Anatomy Grid */
+.anatomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.anatomy-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.anatomy-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.anatomy-term {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.anatomy-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* Font Classification */
+.font-class-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.font-class-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.font-class-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.font-class-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.font-class-name {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.font-class-examples {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.font-class-personality {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+
+.font-class-usage {
+  font-size: 11px;
+  color: var(--text2);
+}
+
+/* Pairing Grid */
+.pairing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.pairing-card {
+  background: white;
+  border-radius: 14px;
+  padding: 18px;
+  transition: all 0.2s;
+}
+
+.pairing-card.good {
+  border: 1px solid rgba(40, 205, 65, 0.2);
+  background: rgba(40, 205, 65, 0.03);
+}
+
+.pairing-card.bad {
+  border: 1px solid rgba(255, 59, 48, 0.15);
+  background: rgba(255, 59, 48, 0.02);
+}
+
+.pairing-verdict {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.pairing-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pairing-rule {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.pairing-example {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--blue);
+  font-family: 'SF Mono', monospace;
+}
+
+/* Scale Grid */
+.scale-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.scale-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.scale-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.scale-name {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text2);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.scale-ratio {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'SF Mono', monospace;
+}
+
+.scale-feel {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 6px;
+}
+
+/* Readability Grid */
+.readability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.readability-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.readability-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.readability-metric {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 6px;
+  font-family: 'SF Mono', monospace;
+}
+
+.readability-label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.readability-desc {
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.4;
+}
+
+/* Design Laws Grid */
+.laws-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.law-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.law-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 113, 227, 0.2);
+}
+
+.law-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+.law-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.law-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.law-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  background: rgba(0, 113, 227, 0.06);
+  padding: 4px 10px;
+  border-radius: 100px;
+  display: inline-block;
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;

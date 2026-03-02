@@ -164,6 +164,7 @@ export default function Home() {
           <div className="app-title">Design System <span>Pro</span></div>
           <nav className="main-nav">
             <button className={`nav-tab ${activeTab === "system" ? "active" : ""}`} onClick={() => setActiveTab("system")}>Système</button>
+            <button className={`nav-tab ${activeTab === "theories" ? "active" : ""}`} onClick={() => setActiveTab("theories")}>Théories</button>
             <button className={`nav-tab ${activeTab === "industry" ? "active" : ""}`} onClick={() => setActiveTab("industry")}>Industries</button>
             <button className={`nav-tab ${activeTab === "flyer" ? "active" : ""}`} onClick={() => setActiveTab("flyer")}>Flyer</button>
             <button className={`nav-tab ${activeTab === "brochure" ? "active" : ""}`} onClick={() => setActiveTab("brochure")}>Brochure</button>
@@ -341,6 +342,439 @@ export default function Home() {
                     <div className="format-platform">{f.p}</div>
                     <div className="format-size">{f.s}</div>
                     <div className="format-ratio">{f.r}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* --- THEORIES PAGE --- */}
+        <div className={`page-content ${activeTab === "theories" ? "active" : ""}`}>
+
+          {/* GOLDEN RATIO */}
+          <div className="card">
+            <div className="card-header"><div className="card-title">📐 Le Nombre d'Or — φ 1.618</div></div>
+            <div className="card-body">
+              <p className="theory-intro">Le nombre d'or (φ = 1.618…) est un ratio mathématique que l'on retrouve dans la nature, l'architecture et l'art. Il crée des proportions naturellement harmonieuses et agréables à l'œil.</p>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🌀 La Spirale de Fibonacci</div>
+                <p className="theory-text">La suite de Fibonacci (1, 1, 2, 3, 5, 8, 13, 21…) converge vers φ. Chaque nombre est la somme des deux précédents. La spirale qui en résulte guide naturellement le regard.</p>
+                <div className="golden-spiral-demo">
+                  <svg viewBox="0 0 340 210" className="golden-svg">
+                    <rect x="0" y="0" width="130" height="130" fill="rgba(0,113,227,0.06)" stroke="rgba(0,113,227,0.2)" strokeWidth="1" rx="2" />
+                    <rect x="130" y="0" width="80" height="80" fill="rgba(191,90,242,0.06)" stroke="rgba(191,90,242,0.2)" strokeWidth="1" rx="2" />
+                    <rect x="130" y="80" width="80" height="50" fill="rgba(255,159,10,0.06)" stroke="rgba(255,159,10,0.2)" strokeWidth="1" rx="2" />
+                    <rect x="130" y="80" width="50" height="50" fill="rgba(40,205,65,0.06)" stroke="rgba(40,205,65,0.2)" strokeWidth="1" rx="2" />
+                    <rect x="180" y="80" width="30" height="30" fill="rgba(255,55,95,0.06)" stroke="rgba(255,55,95,0.2)" strokeWidth="1" rx="2" />
+                    <text x="65" y="70" textAnchor="middle" fontSize="18" fill="var(--blue)" fontWeight="600" opacity="0.6">13</text>
+                    <text x="170" y="45" textAnchor="middle" fontSize="14" fill="var(--purple)" fontWeight="600" opacity="0.6">8</text>
+                    <text x="165" y="110" textAnchor="middle" fontSize="11" fill="var(--orange)" fontWeight="600" opacity="0.6">5</text>
+                    <text x="148" y="109" textAnchor="middle" fontSize="9" fill="var(--green)" fontWeight="600" opacity="0.6">3</text>
+                    <text x="195" y="99" textAnchor="middle" fontSize="8" fill="var(--pink)" fontWeight="600" opacity="0.6">2</text>
+                  </svg>
+                  <div className="golden-legend">
+                    <div className="golden-ratio-badge">φ = 1.618034…</div>
+                    <div className="theory-text">Chaque rectangle est φ fois plus grand que le suivant</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">📏 Application en Design</div>
+                <div className="theory-grid-3">
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">📄</div>
+                    <div className="theory-tip-title">Mise en Page</div>
+                    <div className="theory-tip-desc">Diviser la largeur par φ pour créer une colonne principale (62%) et une sidebar (38%)</div>
+                  </div>
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">🔤</div>
+                    <div className="theory-tip-title">Typographie</div>
+                    <div className="theory-tip-desc">Multiplier la taille du corps par φ pour obtenir le titre : 16px × 1.618 ≈ 26px</div>
+                  </div>
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">🖼</div>
+                    <div className="theory-tip-title">Images</div>
+                    <div className="theory-tip-desc">Cadrer les images en ratio 1:1.618 — dimensions harmonieuses naturellement</div>
+                  </div>
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">📐</div>
+                    <div className="theory-tip-title">Espacement</div>
+                    <div className="theory-tip-desc">Marges et paddings en progression φ : 8 → 13 → 21 → 34 → 55px</div>
+                  </div>
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">🎯</div>
+                    <div className="theory-tip-title">Point Focal</div>
+                    <div className="theory-tip-desc">Placer l'élément clé à l'intersection de la spirale dorée</div>
+                  </div>
+                  <div className="theory-tip-card">
+                    <div className="theory-tip-icon">📊</div>
+                    <div className="theory-tip-title">Hiérarchie</div>
+                    <div className="theory-tip-desc">Ratio entre niveaux de taille : H1 ÷ H2 ÷ H3 ≈ φ à chaque étape</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🔢 Règle des Tiers</div>
+                <p className="theory-text">Simplification pratique du nombre d'or : diviser l'espace en 3×3. Les points d'intersection sont les zones de tension visuelle — idéales pour placer les éléments importants.</p>
+                <div className="thirds-demo">
+                  <div className="thirds-grid">
+                    <div className="thirds-line thirds-h" style={{ top: '33.3%' }}></div>
+                    <div className="thirds-line thirds-h" style={{ top: '66.6%' }}></div>
+                    <div className="thirds-line thirds-v" style={{ left: '33.3%' }}></div>
+                    <div className="thirds-line thirds-v" style={{ left: '66.6%' }}></div>
+                    <div className="thirds-point" style={{ top: '33.3%', left: '33.3%' }}></div>
+                    <div className="thirds-point" style={{ top: '33.3%', left: '66.6%' }}></div>
+                    <div className="thirds-point" style={{ top: '66.6%', left: '33.3%' }}></div>
+                    <div className="thirds-point" style={{ top: '66.6%', left: '66.6%' }}></div>
+                    <div className="thirds-label" style={{ top: '28%', left: '28%' }}>⭐</div>
+                    <div className="thirds-label" style={{ top: '28%', left: '62%' }}>⭐</div>
+                    <div className="thirds-label" style={{ top: '61%', left: '28%' }}>⭐</div>
+                    <div className="thirds-label" style={{ top: '61%', left: '62%' }}>⭐</div>
+                  </div>
+                  <div className="theory-text" style={{ marginTop: '12px', textAlign: 'center' }}>⭐ = Points de tension — placer ici les éléments clés (titre, CTA, logo)</div>
+                </div>
+              </div>
+
+              <div className="infobox blue">
+                <strong>En pratique :</strong> <span className="opacity-70">Le nombre d'or n'est pas une règle stricte, mais un guide. Les designs les plus réussis l'utilisent comme point de départ, puis ajustent visuellement.</span>
+              </div>
+            </div>
+          </div>
+
+          {/* COLOR THEORY */}
+          <div className="card">
+            <div className="card-header"><div className="card-title">🎨 Théorie des Couleurs</div></div>
+            <div className="card-body">
+              <p className="theory-intro">La théorie des couleurs est un ensemble de principes qui régissent l'utilisation harmonieuse des couleurs. Comprendre le cercle chromatique et les relations entre couleurs est essentiel pour tout designer.</p>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🔵 Le Cercle Chromatique</div>
+                <p className="theory-text">Le cercle chromatique organise les couleurs selon leur relation. Les couleurs primaires (rouge, jaune, bleu) se combinent pour former les secondaires, puis les tertiaires.</p>
+                <div className="color-wheel-demo">
+                  <svg viewBox="0 0 240 240" className="color-wheel-svg">
+                    {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle, i) => {
+                      const hue = angle;
+                      const r = 100;
+                      const cx = 120 + r * Math.cos((angle - 90) * Math.PI / 180);
+                      const cy = 120 + r * Math.sin((angle - 90) * Math.PI / 180);
+                      return <circle key={i} cx={cx} cy={cy} r="18" fill={`hsl(${hue}, 75%, 55%)`} opacity="0.85" />;
+                    })}
+                    <circle cx="120" cy="120" r="35" fill="white" stroke="var(--border)" strokeWidth="1" />
+                    <text x="120" y="124" textAnchor="middle" fontSize="10" fill="var(--text2)" fontWeight="600">CERCLE</text>
+                  </svg>
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🎯 Harmonies de Couleurs</div>
+                <p className="theory-text">Les harmonies sont des combinaisons de couleurs basées sur leur position sur le cercle chromatique. Chaque harmonie crée une ambiance différente.</p>
+                <div className="harmony-grid">
+                  <div className="harmony-card">
+                    <div className="harmony-title">Complémentaire</div>
+                    <div className="harmony-desc">Couleurs opposées sur le cercle. Contraste maximal, dynamique.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#0071E3' }}></div>
+                      <div className="h-swatch" style={{ background: '#E37100' }}></div>
+                    </div>
+                    <div className="harmony-use">CTA · Headlines · Accents forts</div>
+                  </div>
+                  <div className="harmony-card">
+                    <div className="harmony-title">Analogue</div>
+                    <div className="harmony-desc">Couleurs voisines. Harmonieux, naturel, apaisant.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#0071E3' }}></div>
+                      <div className="h-swatch" style={{ background: '#007AFF' }}></div>
+                      <div className="h-swatch" style={{ background: '#5856D6' }}></div>
+                    </div>
+                    <div className="harmony-use">Illustrations · Fonds · Ambiance</div>
+                  </div>
+                  <div className="harmony-card">
+                    <div className="harmony-title">Triadique</div>
+                    <div className="harmony-desc">3 couleurs équidistantes (120°). Vibrant, équilibré.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#FF3B30' }}></div>
+                      <div className="h-swatch" style={{ background: '#34C759' }}></div>
+                      <div className="h-swatch" style={{ background: '#007AFF' }}></div>
+                    </div>
+                    <div className="harmony-use">Identité visuelle · Infographies</div>
+                  </div>
+                  <div className="harmony-card">
+                    <div className="harmony-title">Split-Complémentaire</div>
+                    <div className="harmony-desc">1 couleur + 2 voisines de sa complémentaire. Contraste nuancé.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#0071E3' }}></div>
+                      <div className="h-swatch" style={{ background: '#FF9500' }}></div>
+                      <div className="h-swatch" style={{ background: '#FF3B30' }}></div>
+                    </div>
+                    <div className="harmony-use">Web design · Print premium</div>
+                  </div>
+                  <div className="harmony-card">
+                    <div className="harmony-title">Monochromatique</div>
+                    <div className="harmony-desc">Une seule teinte, variations de luminosité et saturation.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#004FB1' }}></div>
+                      <div className="h-swatch" style={{ background: '#0071E3' }}></div>
+                      <div className="h-swatch" style={{ background: '#64B5F6' }}></div>
+                      <div className="h-swatch" style={{ background: '#BBDEFB' }}></div>
+                    </div>
+                    <div className="harmony-use">Élégance · Minimalisme · Luxe</div>
+                  </div>
+                  <div className="harmony-card">
+                    <div className="harmony-title">Tétradique</div>
+                    <div className="harmony-desc">4 couleurs en rectangle. Riche et complexe.</div>
+                    <div className="harmony-swatches">
+                      <div className="h-swatch" style={{ background: '#FF3B30' }}></div>
+                      <div className="h-swatch" style={{ background: '#FF9500' }}></div>
+                      <div className="h-swatch" style={{ background: '#007AFF' }}></div>
+                      <div className="h-swatch" style={{ background: '#34C759' }}></div>
+                    </div>
+                    <div className="harmony-use">Dashboards · Apps · Illustrations</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🧠 Psychologie des Couleurs</div>
+                <p className="theory-text">Chaque couleur véhicule des émotions et des messages inconscients. Le choix des couleurs influence directement la perception de la marque.</p>
+                <div className="psych-grid">
+                  {[
+                    { color: '#FF3B30', name: 'Rouge', emotions: 'Passion · Urgence · Énergie', usage: 'CTA, promotions, food' },
+                    { color: '#FF9500', name: 'Orange', emotions: 'Enthousiasme · Chaleur · Créativité', usage: 'E-commerce, jeunesse' },
+                    { color: '#FFCC00', name: 'Jaune', emotions: 'Optimisme · Joie · Attention', usage: 'Alertes, enfance, solaire' },
+                    { color: '#34C759', name: 'Vert', emotions: 'Nature · Santé · Confiance', usage: 'Bio, finance, santé' },
+                    { color: '#007AFF', name: 'Bleu', emotions: 'Confiance · Sérénité · Professionnalisme', usage: 'Tech, finance, corporate' },
+                    { color: '#AF52DE', name: 'Violet', emotions: 'Luxe · Mystère · Créativité', usage: 'Luxe, beauté, spirituel' },
+                    { color: '#FF375F', name: 'Rose', emotions: 'Féminité · Douceur · Romance', usage: 'Beauté, mariage, mode' },
+                    { color: '#1D1D1F', name: 'Noir', emotions: 'Élégance · Pouvoir · Mystère', usage: 'Luxe, mode, tech premium' },
+                  ].map(c => (
+                    <div key={c.name} className="psych-card">
+                      <div className="psych-dot" style={{ background: c.color }}></div>
+                      <div className="psych-name">{c.name}</div>
+                      <div className="psych-emotions">{c.emotions}</div>
+                      <div className="psych-usage">{c.usage}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">⚖️ La Règle 60 – 30 – 10</div>
+                <p className="theory-text">Principe de décoration intérieure appliqué au design graphique. Garantit un équilibre visuel optimal.</p>
+                <div className="rule-demo">
+                  <div className="rule-bar">
+                    <div className="rule-segment rule-60" style={{ width: '60%' }}>
+                      <span>60%</span>
+                      <small>Dominante</small>
+                    </div>
+                    <div className="rule-segment rule-30" style={{ width: '30%' }}>
+                      <span>30%</span>
+                      <small>Secondaire</small>
+                    </div>
+                    <div className="rule-segment rule-10" style={{ width: '10%' }}>
+                      <span>10%</span>
+                    </div>
+                  </div>
+                  <div className="rule-legend">
+                    <div className="rule-item"><div className="rule-dot" style={{ background: '#F5F5F7' }}></div><strong>60% Dominante</strong> — Fond, espaces vides, base neutre</div>
+                    <div className="rule-item"><div className="rule-dot" style={{ background: '#1D1D1F' }}></div><strong>30% Secondaire</strong> — Texte, sections, structure</div>
+                    <div className="rule-item"><div className="rule-dot" style={{ background: '#0071E3' }}></div><strong>10% Accent</strong> — CTA, liens, éléments interactifs</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="do-dont">
+                <div className="do-card do"><div className="do-label">✅ À faire</div>
+                  <div className="do-item"><span>→</span> Max 4 couleurs par support</div>
+                  <div className="do-item"><span>→</span> Toujours vérifier le contraste WCAG</div>
+                  <div className="do-item"><span>→</span> Utiliser une palette cohérente sur tous les supports</div>
+                  <div className="do-item"><span>→</span> Tester en niveaux de gris pour la hiérarchie</div>
+                </div>
+                <div className="do-card dont"><div className="do-label">❌ À éviter</div>
+                  <div className="do-item"><span>→</span> Couleurs pures saturées sur de grandes surfaces</div>
+                  <div className="do-item"><span>→</span> Rouge + vert ensemble (daltonisme)</div>
+                  <div className="do-item"><span>→</span> Trop de couleurs vives en même temps</div>
+                  <div className="do-item"><span>→</span> Texte coloré sur fond coloré sans contraste</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* TYPOGRAPHY THEORY */}
+          <div className="card">
+            <div className="card-header"><div className="card-title">🔤 Théorie Typographique</div></div>
+            <div className="card-body">
+              <p className="theory-intro">La typographie est l'art de rendre le texte lisible, beau et fonctionnel. Elle représente 95% du design web et imprimé — la maîtriser est essentiel.</p>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🔬 Anatomie d'une Lettre</div>
+                <p className="theory-text">Connaître le vocabulaire typographique permet de choisir, comparer et ajuster les polices avec précision.</p>
+                <div className="anatomy-grid">
+                  {[
+                    { term: 'Ascendante', desc: 'Partie au-dessus de la hauteur x (b, d, h, l)', color: 'var(--blue)' },
+                    { term: 'Descendante', desc: 'Partie en-dessous de la ligne de base (g, p, q, y)', color: 'var(--purple)' },
+                    { term: 'Hauteur x', desc: 'Hauteur des minuscules sans ascendante — affecte la lisibilité', color: 'var(--green)' },
+                    { term: 'Empattement (Serif)', desc: 'Petites extensions aux extrémités des caractères', color: 'var(--orange)' },
+                    { term: 'F\u00fbt / Hampe', desc: "Trait vertical principal d\u2019une lettre", color: 'var(--red)' },
+                    { term: 'Contreforme', desc: "Espace int\u00e9rieur ferm\u00e9 (o, d, p) \u2014 affecte la lisibilit\u00e9", color: 'var(--teal)' },
+                    { term: 'Graisse', desc: 'Épaisseur du trait : Light → Regular → Bold → Black', color: 'var(--pink)' },
+                    { term: 'Chasse', desc: "Largeur d\u2019un caract\u00e8re \u2014 condens\u00e9e, r\u00e9guli\u00e8re ou \u00e9tendue", color: 'var(--text2)' },
+                  ].map(a => (
+                    <div key={a.term} className="anatomy-item">
+                      <div className="anatomy-dot" style={{ background: a.color }}></div>
+                      <div>
+                        <div className="anatomy-term">{a.term}</div>
+                        <div className="anatomy-desc">{a.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">📂 Classification des Polices</div>
+                <p className="theory-text">Les grandes familles typographiques et leurs usages recommandés.</p>
+                <div className="font-class-grid">
+                  {[
+                    { family: 'Serif', examples: 'Times, Garamond, Merriweather', personality: 'Classique · Fiable · Élégant', usage: 'Éditorial, luxe, finance, print', icon: '🏛' },
+                    { family: 'Sans-Serif', examples: 'Helvetica, Inter, DM Sans', personality: 'Moderne · Neutre · Lisible', usage: 'Tech, startup, web, UI', icon: '💎' },
+                    { family: 'Slab Serif', examples: 'Rockwell, Museo Slab, Roboto Slab', personality: 'Solide · Confiant · Impactant', usage: 'Titres, affiches, branding', icon: '🏗' },
+                    { family: 'Display', examples: 'Bebas Neue, Abril Fatface, Playfair', personality: 'Expressif · Décoratif · Unique', usage: 'Titres uniquement, logos, héros', icon: '✨' },
+                    { family: 'Monospace', examples: 'Fira Code, JetBrains Mono, SF Mono', personality: 'Technique · Précis · Codeur', usage: 'Code, données, badges techniques', icon: '⌨️' },
+                    { family: 'Script / Handwritten', examples: 'Pacifico, Dancing Script, Caveat', personality: 'Personnel · Artisanal · Chaleureux', usage: 'Invitations, logos, accents', icon: '✍️' },
+                  ].map(f => (
+                    <div key={f.family} className="font-class-card">
+                      <div className="font-class-icon">{f.icon}</div>
+                      <div className="font-class-name">{f.family}</div>
+                      <div className="font-class-examples">{f.examples}</div>
+                      <div className="font-class-personality">{f.personality}</div>
+                      <div className="font-class-usage">{f.usage}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">🤝 Règles d'Appariement (Pairing)</div>
+                <p className="theory-text">Combiner les polices est un art. Les meilleures combinaisons créent du contraste tout en maintenant la cohérence.</p>
+                <div className="pairing-grid">
+                  {[
+                    { title: 'Serif + Sans-Serif', rule: 'La combinaison classique universelle', ex: 'Playfair Display + DM Sans', verdict: 'good' },
+                    { title: 'Display + Neutre', rule: 'Titre expressif + corps lisible', ex: 'Bebas Neue + Roboto', verdict: 'good' },
+                    { title: 'Même superfamille', rule: 'Variations de la même police (poids, style)', ex: 'Inter Light + Inter Bold', verdict: 'good' },
+                    { title: 'Serif + Serif', rule: 'Deux serif = conflit, manque de contraste', ex: 'Times + Georgia', verdict: 'bad' },
+                    { title: 'Script + Script', rule: 'Illisible et chaotique', ex: 'Pacifico + Dancing Script', verdict: 'bad' },
+                    { title: '3+ familles', rule: 'Incohérent — max 2 familles par support', ex: 'Playfair + Roboto + Oswald', verdict: 'bad' },
+                  ].map(p => (
+                    <div key={p.title} className={`pairing-card ${p.verdict}`}>
+                      <div className="pairing-verdict">{p.verdict === 'good' ? '✅' : '❌'}</div>
+                      <div className="pairing-title">{p.title}</div>
+                      <div className="pairing-rule">{p.rule}</div>
+                      <div className="pairing-example">{p.ex}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">📏 Échelle Typographique Modulaire</div>
+                <p className="theory-text">Une échelle modulaire utilise un ratio constant entre chaque niveau de taille. Les ratios les plus courants :</p>
+                <div className="scale-grid">
+                  {[
+                    { name: 'Minor Second', ratio: '1.067', feel: 'Subtil, dense' },
+                    { name: 'Major Second', ratio: '1.125', feel: 'Sobre, éditorial' },
+                    { name: 'Minor Third', ratio: '1.200', feel: 'Équilibré, polyvalent' },
+                    { name: 'Major Third', ratio: '1.250', feel: 'Classique, lisible' },
+                    { name: 'Perfect Fourth', ratio: '1.333', feel: 'Dynamique, contrasté' },
+                    { name: 'Golden Ratio', ratio: '1.618', feel: 'Harmonieux, naturel' },
+                  ].map(s => (
+                    <div key={s.name} className="scale-card">
+                      <div className="scale-name">{s.name}</div>
+                      <div className="scale-ratio">{s.ratio}</div>
+                      <div className="scale-feel">{s.feel}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="infobox blue mt-4">
+                  <strong>Méthode de calcul :</strong> <span className="opacity-70">Base (16px) × ratio = niveau suivant. Exemple avec Major Third (1.250) : 16 → 20 → 25 → 31 → 39 → 49px</span>
+                </div>
+              </div>
+
+              <div className="theory-section">
+                <div className="theory-subtitle">📐 Règles de Lisibilité</div>
+                <div className="readability-grid">
+                  <div className="readability-card">
+                    <div className="readability-metric">45–75</div>
+                    <div className="readability-label">Caractères par ligne</div>
+                    <div className="readability-desc">Longueur idéale pour le confort de lecture. 66 = optimum.</div>
+                  </div>
+                  <div className="readability-card">
+                    <div className="readability-metric">1.4–1.6</div>
+                    <div className="readability-label">Interligne (line-height)</div>
+                    <div className="readability-desc">× la taille du corps. Titres : 1.1–1.3. Corps : 1.5.</div>
+                  </div>
+                  <div className="readability-card">
+                    <div className="readability-metric">16px</div>
+                    <div className="readability-label">Taille minimum web</div>
+                    <div className="readability-desc">En dessous, la lecture devient fatigante sur écran.</div>
+                  </div>
+                  <div className="readability-card">
+                    <div className="readability-metric">3×</div>
+                    <div className="readability-label">Contraste entre niveaux</div>
+                    <div className="readability-desc">Le titre doit être au moins 3× plus visible que le corps.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="do-dont">
+                <div className="do-card do"><div className="do-label">✅ À faire</div>
+                  <div className="do-item"><span>→</span> Max 2 familles de polices par support</div>
+                  <div className="do-item"><span>→</span> Hiérarchie claire : taille + graisse + couleur</div>
+                  <div className="do-item"><span>→</span> Texte aligné à gauche (sauf titres centrés)</div>
+                  <div className="do-item"><span>→</span> Tester la lisibilité sur mobile</div>
+                </div>
+                <div className="do-card dont"><div className="do-label">❌ À éviter</div>
+                  <div className="do-item"><span>→</span> Justifier le texte sans césure automatique</div>
+                  <div className="do-item"><span>→</span> Texte en majuscules pour les paragraphes</div>
+                  <div className="do-item"><span>→</span> Italic pour le corps entier</div>
+                  <div className="do-item"><span>→</span> Polices décoratives pour le contenu</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* DESIGN LAWS */}
+          <div className="card">
+            <div className="card-header"><div className="card-title">⚡ Lois Fondamentales du Design</div></div>
+            <div className="card-body">
+              <p className="theory-intro">Ces principes universels s'appliquent à tout type de design — print, web, UI, branding. Les connaître permet de créer des compositions plus efficaces et intentionnelles.</p>
+              <div className="laws-grid">
+                {[
+                  { name: 'Proximité', icon: '⊞', desc: 'Les éléments liés doivent être proches. La distance crée la séparation logique.', law: 'Gestalt' },
+                  { name: 'Alignement', icon: '⊡', desc: 'Rien ne doit être placé au hasard. Chaque élément doit avoir une connexion visuelle.', law: 'Composition' },
+                  { name: 'Répétition', icon: '❖', desc: 'Répéter les éléments visuels (couleurs, polices, formes) pour créer la cohérence.', law: 'Unité' },
+                  { name: 'Contraste', icon: '◐', desc: 'Si deux éléments sont différents, les rendre TRÈS différents — pas presque pareils.', law: 'Hiérarchie' },
+                  { name: 'Hiérarchie Visuelle', icon: '△', desc: 'Guider le regard : le plus important en premier, le secondaire ensuite.', law: 'Composition' },
+                  { name: 'Balance', icon: '⚖️', desc: 'Symétrique = formel. Asymétrique = dynamique. Les deux doivent être intentionnels.', law: 'Composition' },
+                  { name: 'Espace Négatif', icon: '☐', desc: "L'espace vide n'est pas gaspillé — il donne de l'air et met en valeur le contenu.", law: 'Respiration' },
+                  { name: 'Loi de Hick', icon: '⏱', desc: 'Plus il y a de choix, plus la décision est lente. Simplifier les options.', law: 'UX / Cognitif' },
+                  {
+                    name: 'Loi de Fitts', icon: '\ud83c\udfaf', desc: "Les cibles (boutons, CTA) doivent \u00eatre grandes et proches du point d\u2019action.", law: 'UX / Ergonomie'
+                  },
+                  { name: 'Effet Von Restorff', icon: '\ud83d\udca1', desc: "L'\u00e9l\u00e9ment qui se d\u00e9marque est celui qu'on retient. Utiliser pour le CTA principal.", law: 'Cognitif' },
+                  {
+                    name: 'Loi de Miller', icon: '7\ufe0f\u20e3', desc: "La m\u00e9moire de travail retient 7\u00b12 \u00e9l\u00e9ments. Grouper l\u2019information en blocs.", law: 'Cognitif'
+                  },
+                  { name: 'Principe de Pareto', icon: '\ud83d\udcca', desc: "80% des r\u00e9sultats viennent de 20% des efforts. Concentrer le design sur l\u2019essentiel.", law: 'Strat\u00e9gie' },
+                ].map(l => (
+                  <div key={l.name} className="law-card">
+                    <div className="law-icon">{l.icon}</div>
+                    <div className="law-name">{l.name}</div>
+                    <div className="law-desc">{l.desc}</div>
+                    <div className="law-tag">{l.law}</div>
                   </div>
                 ))}
               </div>
