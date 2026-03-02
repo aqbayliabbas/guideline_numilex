@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design System Pro</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f2f2f7;
+  --surface: rgba(255,255,255,0.9);
+  --border: rgba(0,0,0,0.08);
+  --text: #1c1c1e;
+  --text2: #6e6e73;
+  --blue: #007aff;
+  --green: #34c759;
+  --orange: #ff9500;
+  --purple: #af52de;
+  --red: #ff3b30;
+  --teal: #5ac8fa;
+  --pink: #ff2d55;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 0 0 80px;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.app-title { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 16px; }
+.app-title span { color: var(--blue); }
+
+/* ── TOP NAV (main tabs) ── */
+.main-nav { display: flex; gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.main-nav::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 12px 20px;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--text2); white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.nav-tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+/* ── CONTENT ── */
+.page { display: none; max-width: 860px; margin: 0 auto; padding: 24px 20px; animation: fadeUp 0.3s ease; }
+.page.active { display: block; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.card-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.card-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text2); display: flex; align-items: center; gap: 7px; }
+.card-body { padding: 18px 20px; }
+.card-footer { padding: 12px 20px; background: rgba(0,0,0,0.02); border-top: 1px solid var(--border); }
+
+/* ── CHECKLIST ── */
+.check-item { display: flex; align-items: flex-start; gap: 13px; padding: 12px 20px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; user-select: none; }
+.check-item:last-child { border-bottom: none; }
+.check-item:hover { background: rgba(0,122,255,0.04); }
+.check-item.checked { opacity: 0.45; }
+.cb { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(0,0,0,0.18); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.check-item.checked .cb { background: var(--green); border-color: var(--green); }
+.cb-tick { opacity: 0; transform: scale(0); transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1); color: white; font-size: 11px; font-weight: 800; }
+.check-item.checked .cb-tick { opacity: 1; transform: scale(1); }
+.it { flex: 1; }
+.il { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+.check-item.checked .il { text-decoration: line-through; color: var(--text2); }
+.id { font-size: 13px; color: var(--text2); line-height: 1.4; }
+.itag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 100px; flex-shrink: 0; margin-top: 2px; }
+.t-c { background: rgba(0,122,255,0.1); color: var(--blue); }
+.t-v { background: rgba(175,82,222,0.1); color: var(--purple); }
+.t-t { background: rgba(255,149,0,0.1); color: var(--orange); }
+
+/* ── PROGRESS ── */
+.progress-bar { height: 4px; background: rgba(0,0,0,0.06); border-radius: 100px; overflow: hidden; margin-top: 8px; }
+.progress-fill { height: 100%; border-radius: 100px; background: var(--blue); transition: width 0.4s cubic-bezier(0.34,1.56,0.64,1); width: 0%; }
+
+/* ── SECTION LABEL ── */
+.sec-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text2); padding: 12px 20px 8px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border); }
+
+/* ── INDUSTRY GRID ── */
+.industry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px,1fr)); gap: 10px; }
+.industry-card {
+  border: 2px solid var(--border);
+  border-radius: 14px; padding: 16px 12px;
+  text-align: center; cursor: pointer;
+  transition: all 0.2s; background: white;
+  user-select: none;
+}
+.industry-card:hover { border-color: var(--blue); transform: translateY(-1px); }
+.industry-card.selected { border-color: var(--blue); background: rgba(0,122,255,0.05); }
+.industry-emoji { font-size: 28px; margin-bottom: 6px; }
+.industry-name { font-size: 12px; font-weight: 600; }
+.industry-sub { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+/* ── INDUSTRY DETAIL ── */
+.industry-detail { display: none; animation: fadeUp 0.3s ease; }
+.industry-detail.active { display: block; }
+
+.spec-row { display: flex; align-items: flex-start; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.spec-row:last-child { border-bottom: none; }
+.spec-icon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
+.spec-content { flex: 1; }
+.spec-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.spec-desc { font-size: 13px; color: var(--text2); line-height: 1.45; }
+
+/* font pills */
+.pill-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pill { padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: white; }
+.pill.primary { background: var(--text); color: white; border-color: var(--text); }
+.pill.secondary { background: rgba(0,0,0,0.06); color: var(--text); }
+.pill.avoid { background: rgba(255,59,48,0.08); color: var(--red); border-color: rgba(255,59,48,0.2); }
+.pill.good { background: rgba(52,199,89,0.1); color: #1a7a34; border-color: rgba(52,199,89,0.3); }
+
+/* color swatches inline */
+.swatch-row { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+.swatch-chip { display: flex; align-items: center; gap: 7px; padding: 5px 10px; border-radius: 100px; border: 1px solid var(--border); background: white; font-size: 12px; font-weight: 500; }
+.swatch-dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
+
+/* ── TYPOGRAPHY SCALE ── */
+.type-row { display: flex; align-items: center; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--border); }
+.type-row:last-child { border-bottom: none; }
+.type-meta { width: 130px; flex-shrink: 0; }
+.type-role { font-size: 11px; font-weight: 700; color: var(--text2); text-transform: uppercase; letter-spacing: 0.4px; }
+.type-spec { font-size: 11px; color: var(--text2); margin-top: 3px; font-family: 'SF Mono', monospace; }
+.type-preview { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.t-display { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; }
+.t-h1 { font-size: 22px; font-weight: 700; }
+.t-h2 { font-size: 18px; font-weight: 600; }
+.t-h3 { font-size: 15px; font-weight: 600; }
+.t-body { font-size: 14px; font-weight: 400; }
+.t-sm { font-size: 12px; color: var(--text2); }
+.t-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--text2); }
+
+/* ── SPACING ── */
+.sp-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.sp-row:last-child { border-bottom: none; }
+.sp-px { font-size: 12px; font-weight: 700; width: 38px; font-family: monospace; flex-shrink: 0; }
+.sp-bar-wrap { width: 130px; flex-shrink: 0; }
+.sp-bar { height: 8px; background: var(--blue); border-radius: 4px; opacity: 0.6; }
+.sp-token { font-size: 12px; font-weight: 600; color: var(--purple); width: 30px; font-family: monospace; }
+.sp-use { font-size: 12px; color: var(--text2); flex: 1; }
+
+/* ── GRID PREVIEW ── */
+.grid-preview { background: rgba(0,122,255,0.04); border: 1px solid rgba(0,122,255,0.12); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.grid-cols { display: flex; gap: 4px; height: 32px; }
+.grid-col { flex: 1; background: rgba(0,122,255,0.15); border-radius: 3px; }
+.grid-meta { display: flex; gap: 18px; margin-top: 8px; flex-wrap: wrap; }
+.gm-label { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.4px; }
+.gm-value { font-size: 13px; font-weight: 700; margin-top: 1px; }
+
+/* ── COMPARE ── */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.compare-card { border-radius: 12px; padding: 16px; border: 1px solid var(--border); }
+.compare-card.print { background: rgba(255,149,0,0.05); }
+.compare-card.digital { background: rgba(0,122,255,0.05); }
+.compare-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.cr { font-size: 12px; display: flex; gap: 8px; margin-bottom: 6px; }
+.ck { color: var(--text2); min-width: 82px; flex-shrink: 0; }
+.cv { font-weight: 600; }
+
+/* ── FORMAT GRID ── */
+.format-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px,1fr)); gap: 8px; }
+.format-card { padding: 13px; background: rgba(0,0,0,0.02); border: 1px solid var(--border); border-radius: 10px; }
+.format-platform { font-size: 11px; font-weight: 600; color: var(--text2); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+.format-size { font-size: 16px; font-weight: 700; }
+.format-ratio { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* ── INFO BOXES ── */
+.infobox { padding: 12px 15px; border-radius: 10px; font-size: 13px; line-height: 1.5; margin-top: 12px; }
+.infobox.blue { background: rgba(0,122,255,0.06); border: 1px solid rgba(0,122,255,0.15); }
+.infobox.orange { background: rgba(255,149,0,0.06); border: 1px solid rgba(255,149,0,0.2); }
+.infobox.green { background: rgba(52,199,89,0.06); border: 1px solid rgba(52,199,89,0.2); }
+.infobox.red { background: rgba(255,59,48,0.06); border: 1px solid rgba(255,59,48,0.2); }
+
+/* ── DO / DON'T ── */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.do-card { border-radius: 10px; padding: 14px; }
+.do-card.do { background: rgba(52,199,89,0.06); border: 1px solid rgba(52,199,89,0.2); }
+.do-card.dont { background: rgba(255,59,48,0.06); border: 1px solid rgba(255,59,48,0.2); }
+.do-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.do-card.do .do-label { color: #1a7a34; }
+.do-card.dont .do-label { color: var(--red); }
+.do-item { font-size: 13px; color: var(--text2); margin-bottom: 5px; display: flex; gap: 6px; }
+.do-item:last-child { margin-bottom: 0; }
+
+/* ── TOOLS ── */
+.tools-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+.tool-badge { display: flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 100px; font-size: 12px; font-weight: 500; border: 1px solid var(--border); background: white; color: var(--text2); }
+
+/* ── RESET BTN ── */
+.reset-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; background: rgba(255,59,48,0.1); color: var(--red); border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.reset-btn:hover { background: rgba(255,59,48,0.18); }
+
+/* ── BACK BTN ── */
+.back-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: rgba(0,122,255,0.08); color: var(--blue); border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; cursor: pointer; font-family: inherit; margin-bottom: 16px; }
+
+@media (max-width: 540px) {
+  .compare-grid, .do-dont { grid-template-columns: 1fr; }
+  .type-meta { width: 90px; }
+  .sp-bar-wrap { width: 80px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">🎨 Design System <span>Pro</span></div>
+  <nav class="main-nav">
+    <button class="nav-tab active" onclick="gotoPage('system')">⚙️ Système Général</button>
+    <button class="nav-tab" onclick="gotoPage('industry')">🏭 Par Industrie</button>
+    <button class="nav-tab" onclick="gotoPage('flyer')">📄 Flyer</button>
+    <button class="nav-tab" onclick="gotoPage('brochure')">📖 Brochure</button>
+    <button class="nav-tab" onclick="gotoPage('carte')">💳 Carte Visite</button>
+    <button class="nav-tab" onclick="gotoPage('fidelite')">⭐ Fidélité</button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE : SYSTÈME GÉNÉRAL
+══════════════════════════════════════════════ -->
+<div id="page-system" class="page active">
+
+  <!-- Typography -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">🔤 Hiérarchie Typographique</div></div>
+    <div class="card-body" style="padding-top:6px;padding-bottom:6px;">
+      <div class="type-row"><div class="type-meta"><div class="type-role">Display</div><div class="type-spec">32px · 700 · -0.5px</div></div><div class="type-preview t-display">Grande Accroche</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">H1 — Titre</div><div class="type-spec">24px · 700 · -0.3px</div></div><div class="type-preview t-h1">Titre Principal</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">H2 — Sous-titre</div><div class="type-spec">20px · 600</div></div><div class="type-preview t-h2">Sous-titre de Section</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">H3 — Rubrique</div><div class="type-spec">17px · 600</div></div><div class="type-preview t-h3">Titre de Paragraphe</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">Corps</div><div class="type-spec">14–16px · 400 · 1.5</div></div><div class="type-preview t-body">Texte courant, descriptions et contenu principal du support</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">Légende</div><div class="type-spec">12px · 400 · 1.4</div></div><div class="type-preview t-sm">Mention légale, note, crédit image, conditions</div></div>
+      <div class="type-row"><div class="type-meta"><div class="type-role">Label</div><div class="type-spec">11px · 700 · CAPS</div></div><div class="type-preview t-label">Catégorie · Tag · Étiquette</div></div>
+    </div>
+    <div class="card-footer">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Règles typographiques universelles</div>
+      <div class="do-dont">
+        <div class="do-card do"><div class="do-label">✅ À faire</div>
+          <div class="do-item"><span>→</span> Max 2 familles de polices par support</div>
+          <div class="do-item"><span>→</span> Contraste fort entre niveaux (3× minimum)</div>
+          <div class="do-item"><span>→</span> Interligne 1.4–1.6 pour le corps de texte</div>
+          <div class="do-item"><span>→</span> Aligner le texte à gauche (lecture naturelle)</div>
+        </div>
+        <div class="do-card dont"><div class="do-label">❌ À éviter</div>
+          <div class="do-item"><span>→</span> Plus de 3 tailles sur un même visuel</div>
+          <div class="do-item"><span>→</span> Texte en italique pour le corps entier</div>
+          <div class="do-item"><span>→</span> Centrer les longs paragraphes</div>
+          <div class="do-item"><span>→</span> Taille inférieure à 7pt en print</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Colors -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">🎨 Système de Couleurs</div></div>
+    <div class="card-body">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:14px;">
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#1c1c1e"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Primaire</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#1C1C1E</div><div style="font-size:10px;color:var(--text2)">Titres, texte</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#6e6e73"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Secondaire</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#6E6E73</div><div style="font-size:10px;color:var(--text2)">Corps, notes</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#f2f2f7;border-bottom:1px solid #e5e5ea"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Background</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#F2F2F7</div><div style="font-size:10px;color:var(--text2)">Fond neutre</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#007aff"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Accent</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#007AFF</div><div style="font-size:10px;color:var(--text2)">CTA, liens</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#34c759"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Succès</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#34C759</div><div style="font-size:10px;color:var(--text2)">Validation</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#ff9500"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Alerte</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#FF9500</div><div style="font-size:10px;color:var(--text2)">Avertissement</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#ff3b30"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Erreur</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#FF3B30</div><div style="font-size:10px;color:var(--text2)">Urgence</div></div></div>
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--border)"><div style="height:46px;background:#ffffff;border-bottom:1px solid #e5e5ea"></div><div style="padding:8px 10px;background:white"><div style="font-size:12px;font-weight:600">Blanc</div><div style="font-size:11px;color:var(--text2);font-family:monospace">#FFFFFF</div><div style="font-size:10px;color:var(--text2)">Surface</div></div></div>
+      </div>
+      <div class="infobox orange"><strong>Règle 60 – 30 – 10 :</strong> <span style="color:var(--text2)">60% dominante · 30% secondaire · 10% accent · Max 4 couleurs par support</span></div>
+      <div class="infobox blue" style="margin-top:8px;"><strong>Contraste WCAG :</strong> <span style="color:var(--text2)">Texte normal ≥ 4.5:1 · Texte large ≥ 3:1 · Vérifier avec Colour Contrast Analyser</span></div>
+    </div>
+  </div>
+
+  <!-- Spacing -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">📐 Échelle d'Espacement</div></div>
+    <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+      <div class="sp-row"><div class="sp-px">4px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:8px"></div></div><div class="sp-token">xs</div><div class="sp-use">Icône/texte, séparateur fin</div></div>
+      <div class="sp-row"><div class="sp-px">8px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:16px"></div></div><div class="sp-token">sm</div><div class="sp-use">Padding bouton, gap éléments proches</div></div>
+      <div class="sp-row"><div class="sp-px">12px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:24px"></div></div><div class="sp-token">md</div><div class="sp-use">Espacement standard entre composants</div></div>
+      <div class="sp-row"><div class="sp-px">16px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:32px"></div></div><div class="sp-token">lg</div><div class="sp-use">Padding section, marges internes carte</div></div>
+      <div class="sp-row"><div class="sp-px">24px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:48px"></div></div><div class="sp-token">xl</div><div class="sp-use">Séparation entre blocs de contenu</div></div>
+      <div class="sp-row"><div class="sp-px">32px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:64px"></div></div><div class="sp-token">2xl</div><div class="sp-use">Marges latérales, espacement sections</div></div>
+      <div class="sp-row"><div class="sp-px">48px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:90px"></div></div><div class="sp-token">3xl</div><div class="sp-use">Zones de respiration, padding page</div></div>
+      <div class="sp-row"><div class="sp-px">64px</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:120px"></div></div><div class="sp-token">4xl</div><div class="sp-use">Espaces vides importants, hero</div></div>
+    </div>
+    <div class="card-footer" style="font-size:13px;color:var(--text2);">💡 <strong style="color:var(--text)">Base 8px</strong> — tous les espacements sont multiples de 4 ou 8 pour cohérence parfaite entre outils</div>
+  </div>
+
+  <!-- Grid -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">🔲 Systèmes de Grille</div></div>
+    <div class="card-body">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Print — A4 / Flyer</div>
+      <div class="grid-preview"><div class="grid-cols"><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div><div class="grid-col"></div></div><div class="grid-meta"><div><div class="gm-label">Colonnes</div><div class="gm-value">4</div></div><div><div class="gm-label">Gouttière</div><div class="gm-value">5mm</div></div><div><div class="gm-label">Marges</div><div class="gm-value">10mm</div></div><div><div class="gm-label">Fond perdu</div><div class="gm-value">3mm</div></div><div><div class="gm-label">Sécurité</div><div class="gm-value">5mm</div></div></div></div>
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin:14px 0 8px;">Digital — Web</div>
+      <div class="grid-preview" style="background:rgba(0,122,255,0.03);border-color:rgba(0,122,255,0.1);"><div class="grid-cols"><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div><div class="grid-col" style="background:rgba(0,122,255,0.15)"></div></div><div class="grid-meta"><div><div class="gm-label">Colonnes</div><div class="gm-value">12</div></div><div><div class="gm-label">Gouttière</div><div class="gm-value">16px</div></div><div><div class="gm-label">Marges</div><div class="gm-value">24px</div></div><div><div class="gm-label">Max-width</div><div class="gm-value">1280px</div></div></div></div>
+      <div style="font-size:11px;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin:14px 0 8px;">Carte (visite / fidélité)</div>
+      <div class="grid-preview" style="background:rgba(52,199,89,0.03);border-color:rgba(52,199,89,0.15);"><div class="grid-cols"><div class="grid-col" style="background:rgba(52,199,89,0.2)"></div><div class="grid-col" style="background:rgba(52,199,89,0.2)"></div><div class="grid-col" style="background:rgba(52,199,89,0.2)"></div></div><div class="grid-meta"><div><div class="gm-label">Colonnes</div><div class="gm-value">3</div></div><div><div class="gm-label">Gouttière</div><div class="gm-value">2mm</div></div><div><div class="gm-label">Marges</div><div class="gm-value">4mm</div></div><div><div class="gm-label">Fond perdu</div><div class="gm-value">2mm</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- Print vs Digital -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">🖨 Print vs 💻 Digital</div></div>
+    <div class="card-body">
+      <div class="compare-grid">
+        <div class="compare-card print">
+          <div class="compare-title">🖨 Print</div>
+          <div class="cr"><span class="ck">Résolution</span><span class="cv">300 dpi min</span></div>
+          <div class="cr"><span class="ck">Mode couleur</span><span class="cv">CMJN (CMYK)</span></div>
+          <div class="cr"><span class="ck">Fond perdu</span><span class="cv">3mm (cartes 2mm)</span></div>
+          <div class="cr"><span class="ck">Zone sécurité</span><span class="cv">5mm du bord</span></div>
+          <div class="cr"><span class="ck">Typo min</span><span class="cv">7pt</span></div>
+          <div class="cr"><span class="ck">Export</span><span class="cv">PDF/X-1a ou -3</span></div>
+          <div class="cr"><span class="ck">Polices</span><span class="cv">Incorporées/vectorisées</span></div>
+          <div class="cr"><span class="ck">Noir riche</span><span class="cv">C40 M30 Y30 K100</span></div>
+        </div>
+        <div class="compare-card digital">
+          <div class="compare-title">💻 Digital</div>
+          <div class="cr"><span class="ck">Résolution</span><span class="cv">72–96 dpi</span></div>
+          <div class="cr"><span class="ck">Mode couleur</span><span class="cv">RVB / HEX / HSL</span></div>
+          <div class="cr"><span class="ck">Fond perdu</span><span class="cv">Non requis</span></div>
+          <div class="cr"><span class="ck">Safe zone</span><span class="cv">Padding CSS</span></div>
+          <div class="cr"><span class="ck">Typo min</span><span class="cv">12px écran</span></div>
+          <div class="cr"><span class="ck">Export</span><span class="cv">PNG · SVG · WebP</span></div>
+          <div class="cr"><span class="ck">Polices</span><span class="cv">Google Fonts / web</span></div>
+          <div class="cr"><span class="ck">Contraste</span><span class="cv">WCAG AA ≥ 4.5:1</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formats -->
+  <div class="card">
+    <div class="card-header"><div class="card-title">📲 Formats Digitaux Standards</div></div>
+    <div class="card-body">
+      <div class="format-grid">
+        <div class="format-card"><div class="format-platform">Instagram Post</div><div class="format-size">1080×1080</div><div class="format-ratio">Carré 1:1</div></div>
+        <div class="format-card"><div class="format-platform">Instagram Story</div><div class="format-size">1080×1920</div><div class="format-ratio">Vertical 9:16</div></div>
+        <div class="format-card"><div class="format-platform">Facebook Post</div><div class="format-size">1200×630</div><div class="format-ratio">Paysage 1.91:1</div></div>
+        <div class="format-card"><div class="format-platform">Facebook Cover</div><div class="format-size">820×312</div><div class="format-ratio">Panoramique</div></div>
+        <div class="format-card"><div class="format-platform">LinkedIn Post</div><div class="format-size">1200×627</div><div class="format-ratio">Paysage</div></div>
+        <div class="format-card"><div class="format-platform">LinkedIn Banner</div><div class="format-size">1584×396</div><div class="format-ratio">4:1</div></div>
+        <div class="format-card"><div class="format-platform">YouTube Thumb</div><div class="format-size">1280×720</div><div class="format-ratio">HD 16:9</div></div>
+        <div class="format-card"><div class="format-platform">Email Header</div><div class="format-size">600×200</div><div class="format-ratio">Horizontal</div></div>
+        <div class="format-card"><div class="format-platform">Google Display</div><div class="format-size">300×250</div><div class="format-ratio">Rectangle</div></div>
+        <div class="format-card"><div class="format-platform">Leaderboard</div><div class="format-size">728×90</div><div class="format-ratio">Bannière web</div></div>
+        <div class="format-card"><div class="format-platform">OG / Meta</div><div class="format-size">1200×630</div><div class="format-ratio">Partage web</div></div>
+        <div class="format-card"><div class="format-platform">TikTok / Reels</div><div class="format-size">1080×1920</div><div class="format-ratio">9:16 vertical</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-system -->
+
+
+<!-- ══════════════════════════════════════════════
+     PAGE : PAR INDUSTRIE
+══════════════════════════════════════════════ -->
+<div id="page-industry" class="page">
+
+  <!-- SELECTOR -->
+  <div id="industry-selector">
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏭 Choisir une Industrie</div></div>
+      <div class="card-body">
+        <p style="font-size:14px;color:var(--text2);margin-bottom:16px;">Sélectionne ton secteur pour obtenir des recommandations typographiques, de couleurs et de style spécifiques à ton industrie.</p>
+        <div class="industry-grid">
+          <div class="industry-card" onclick="showIndustry('beaute')"><div class="industry-emoji">💄</div><div class="industry-name">Beauté</div><div class="industry-sub">& Bien-être</div></div>
+          <div class="industry-card" onclick="showIndustry('food')"><div class="industry-emoji">🍕</div><div class="industry-name">Restauration</div><div class="industry-sub">Food & Café</div></div>
+          <div class="industry-card" onclick="showIndustry('mode')"><div class="industry-emoji">👗</div><div class="industry-name">Mode</div><div class="industry-sub">& Retail</div></div>
+          <div class="industry-card" onclick="showIndustry('finance')"><div class="industry-emoji">💼</div><div class="industry-name">Finance</div><div class="industry-sub">& Conseil</div></div>
+          <div class="industry-card" onclick="showIndustry('sante')"><div class="industry-emoji">🏥</div><div class="industry-name">Santé</div><div class="industry-sub">& Médical</div></div>
+          <div class="industry-card" onclick="showIndustry('btp')"><div class="industry-emoji">🏗</div><div class="industry-name">BTP</div><div class="industry-sub">& Artisanat</div></div>
+          <div class="industry-card" onclick="showIndustry('luxe')"><div class="industry-emoji">🏨</div><div class="industry-name">Luxe</div><div class="industry-sub">& Hôtellerie</div></div>
+          <div class="industry-card" onclick="showIndustry('tech')"><div class="industry-emoji">💻</div><div class="industry-name">Tech</div><div class="industry-sub">& Startup</div></div>
+          <div class="industry-card" onclick="showIndustry('education')"><div class="industry-emoji">🎓</div><div class="industry-name">Éducation</div><div class="industry-sub">& Formation</div></div>
+          <div class="industry-card" onclick="showIndustry('sport')"><div class="industry-emoji">⚡</div><div class="industry-name">Sport</div><div class="industry-sub">& Fitness</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL PANELS -->
+  <div id="industry-detail-wrap">
+
+  <!-- BEAUTÉ -->
+  <div id="ind-beaute" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">💄 Beauté & Bien-être</div>
+        <div style="font-size:12px;color:var(--text2);">Salon · Spa · Cosmétique · Esthétique</div>
+      </div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group">
+            <span class="pill primary">Cormorant Garamond</span><span class="pill primary">Playfair Display</span>
+            <span class="pill secondary">DM Sans</span><span class="pill secondary">Lato</span><span class="pill secondary">Raleway</span>
+          </div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Serif élégante pour les titres + sans-serif fine pour le corps. Éviter les polices trop grasses ou agressives.</div>
+          <div class="pill-group" style="margin-top:6px;"><span class="pill avoid">❌ Impact</span><span class="pill avoid">❌ Arial Bold</span><span class="pill avoid">❌ Futura Heavy</span></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette de couleurs</div>
+          <div class="swatch-row">
+            <div class="swatch-chip"><div class="swatch-dot" style="background:#f5e6d8"></div> #F5E6D8 <span style="color:var(--text2);font-size:11px">Rose poudré</span></div>
+            <div class="swatch-chip"><div class="swatch-dot" style="background:#c9a882"></div> #C9A882 <span style="color:var(--text2);font-size:11px">Beige doré</span></div>
+            <div class="swatch-chip"><div class="swatch-dot" style="background:#2d2d2d"></div> #2D2D2D <span style="color:var(--text2);font-size:11px">Noir doux</span></div>
+            <div class="swatch-chip"><div class="swatch-dot" style="background:#ffffff;border:1px solid #ddd"></div> #FFFFFF <span style="color:var(--text2);font-size:11px">Blanc pur</span></div>
+          </div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Tons neutres chauds, pastels doux. Eviter le rouge vif ou le vert industriel.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel & style</div><div class="spec-desc">Élégant, doux, féminin (si public cible féminin). Beaucoup d'espace blanc. Photos lumineuses, haute qualité. Formes organiques, arrondies. Éviter les angles agressifs.</div></div></div>
+        <div class="spec-row"><div class="spec-icon">🖼</div><div class="spec-content"><div class="spec-title">Visuels & images</div><div class="spec-desc">Photos professionnelles en studio, fond blanc ou béton clair. Textures naturelles (marbre, coton, soie). Pas de photos stock génériques.</div></div></div>
+        <div class="spec-row"><div class="spec-icon">📐</div><div class="spec-content"><div class="spec-title">Mise en page</div><div class="spec-desc">Beaucoup d'espace blanc (≥40% de la surface). Titres centrés autorisés pour cette industrie. Alignements fins, espacements généreux.</div></div></div>
+      </div>
+      <div class="card-footer">
+        <div class="do-dont">
+          <div class="do-card do"><div class="do-label">✅ Marques de référence</div>
+            <div class="do-item"><span>→</span> Glossier (minimaliste, rose)</div>
+            <div class="do-item"><span>→</span> Aesop (typographie, textures)</div>
+            <div class="do-item"><span>→</span> Chanel Beauté (noir/blanc/or)</div>
+          </div>
+          <div class="do-card dont"><div class="do-label">❌ Erreurs fréquentes</div>
+            <div class="do-item"><span>→</span> Trop de couleurs criardes</div>
+            <div class="do-item"><span>→</span> Polices trop grasses / agressives</div>
+            <div class="do-item"><span>→</span> Surcharger le visuel d'infos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOD -->
+  <div id="ind-food" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🍕 Restauration & Food</div><div style="font-size:12px;color:var(--text2);">Restaurant · Café · Fast-food · Traiteur</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group">
+            <span class="pill primary">Libre Baskerville</span><span class="pill primary">Abril Fatface</span>
+            <span class="pill secondary">Josefin Sans</span><span class="pill secondary">Nunito</span>
+          </div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;"><strong>Restaurant gastronomique :</strong> serif classique. <strong>Fast-food / Street :</strong> sans-serif bold, impactante. <strong>Café / Brunch :</strong> handwritten + sans-serif.</div>
+          <div class="pill-group" style="margin-top:6px;"><span class="pill avoid">❌ Comic Sans</span><span class="pill avoid">❌ Times New Roman</span></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette selon le positionnement</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;"><strong>Gastronomique :</strong></div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#1a1a1a"></div> Noir</div><div class="swatch-chip"><div class="swatch-dot" style="background:#c9a53a"></div> Or</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f5f0e8"></div> Crème</div></div>
+          <div style="font-size:12px;color:var(--text2);margin:8px 0 6px;"><strong>Street food / Fast :</strong></div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#e63946"></div> Rouge vif</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f4a261"></div> Orange</div><div class="swatch-chip"><div class="swatch-dot" style="background:#1d1d1d"></div> Noir</div></div>
+          <div style="font-size:12px;color:var(--text2);margin:8px 0 6px;"><strong>Bio / Healthy :</strong></div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#4a7c59"></div> Vert</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f5f5dc"></div> Beige</div><div class="swatch-chip"><div class="swatch-dot" style="background:#8b5e3c"></div> Marron</div></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Photos de plats appétissantes en lumière naturelle. Textures authentiques (bois, kraft, ardoise). Ambiance chaleureuse. Le visuel doit « donner faim ».</div></div></div>
+        <div class="spec-row"><div class="spec-icon">⚠️</div><div class="spec-content"><div class="spec-title">Note importante</div><div class="spec-desc">Les couleurs chaudes (rouge, orange) stimulent l'appétit — utilisées sciemment par McDonald's, Pizza Hut. Le vert et le brun évoquent le naturel et le bio.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Nobu (luxe, minimaliste)</div><div class="do-item"><span>→</span> Five Guys (bold, authentique)</div><div class="do-item"><span>→</span> Sweetgreen (bio, vert, clean)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Photos de mauvaise qualité</div><div class="do-item"><span>→</span> Couleurs froides (bleu) en dominante</div><div class="do-item"><span>→</span> Trop de texte sur le menu visuel</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- MODE -->
+  <div id="ind-mode" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">👗 Mode & Retail</div><div style="font-size:12px;color:var(--text2);">Boutique · Prêt-à-porter · Accessoires</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Bodoni Moda</span><span class="pill primary">Didact Gothic</span><span class="pill secondary">Futura PT</span><span class="pill secondary">Helvetica Neue</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;"><strong>Luxe/Couture :</strong> Bodoni, Didot (contrastes forts). <strong>Streetwear :</strong> Bold condensed, caps. <strong>Casual :</strong> Futura, Helvetica épuré.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div style="font-size:12px;color:var(--text2);margin-bottom:6px;"><strong>Luxe :</strong></div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#000000"></div> Noir</div><div class="swatch-chip"><div class="swatch-dot" style="background:#c9a53a"></div> Or</div><div class="swatch-chip"><div class="swatch-dot" style="background:#ffffff;border:1px solid #ddd"></div> Blanc</div></div>
+          <div style="font-size:12px;color:var(--text2);margin:8px 0 6px;"><strong>Casual / Contemporain :</strong></div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#e8dcc8"></div> Sable</div><div class="swatch-chip"><div class="swatch-dot" style="background:#7b6b52"></div> Camel</div><div class="swatch-chip"><div class="swatch-dot" style="background:#2c2c2c"></div> Anthracite</div></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Photos de mode soignées, mises en scène. Beaucoup d'espace vide. Typo très grande en couverture. Le produit = la star. Éviter les fonds chargés.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Zara (minimal, noir/blanc)</div><div class="do-item"><span>→</span> Louis Vuitton (serif, or)</div><div class="do-item"><span>→</span> Supreme (bold, rouge, impact)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Photos non retouchées / mal éclairées</div><div class="do-item"><span>→</span> Trop de couleurs sur un même flyer</div><div class="do-item"><span>→</span> Police festive pour du luxe</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- FINANCE -->
+  <div id="ind-finance" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">💼 Finance & Conseil</div><div style="font-size:12px;color:var(--text2);">Cabinet · Comptabilité · Assurance · Immobilier</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Merriweather</span><span class="pill primary">Source Serif Pro</span><span class="pill secondary">IBM Plex Sans</span><span class="pill secondary">Inter</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Sérieuse, lisible, professionnelle. Serif pour les titres = crédibilité et tradition. Sans-serif pour le corps = lisibilité.</div>
+          <div class="pill-group" style="margin-top:6px;"><span class="pill avoid">❌ Polices décoratives</span><span class="pill avoid">❌ Handwritten</span></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#003087"></div> Bleu marine</div><div class="swatch-chip"><div class="swatch-dot" style="background:#c9a53a"></div> Or</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f7f7f7"></div> Gris clair</div><div class="swatch-chip"><div class="swatch-dot" style="background:#1c1c1e"></div> Noir</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Bleu marine = confiance, stabilité, autorité. Or = prestige. Jamais de couleurs criardes.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Sobre, structuré, rigoureux. Grille stricte. Iconographie simple et nette. Éviter tout ce qui semble informel ou amateuriste. La rigueur = la confiance.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Goldman Sachs (bleu, sobre)</div><div class="do-item"><span>→</span> Deloitte (vert, clean, pro)</div><div class="do-item"><span>→</span> BNP Paribas (bleu, structuré)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Couleurs trop vives ou fun</div><div class="do-item"><span>→</span> Polices fantaisie</div><div class="do-item"><span>→</span> Mise en page désorganisée</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- SANTÉ -->
+  <div id="ind-sante" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏥 Santé & Médical</div><div style="font-size:12px;color:var(--text2);">Médecin · Pharmacie · Dentiste · Clinique</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Nunito</span><span class="pill primary">Open Sans</span><span class="pill secondary">Lato</span><span class="pill secondary">Roboto</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Polices rondes et lisibles = accessibilité et douceur. Taille généreuse obligatoire. Clarté avant tout.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#0077b6"></div> Bleu ciel</div><div class="swatch-chip"><div class="swatch-dot" style="background:#90e0ef"></div> Bleu clair</div><div class="swatch-chip"><div class="swatch-dot" style="background:#ffffff;border:1px solid #ddd"></div> Blanc</div><div class="swatch-chip"><div class="swatch-dot" style="background:#4caf50"></div> Vert santé</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Bleu = confiance, calme, hygiène. Blanc = propreté. Vert = santé, nature. Éviter le rouge (peur) sauf urgence.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Rassurant, clair, accessible. Iconographie simple et universelle. Photos humaines bienveillantes (sourire, professionnel). Beaucoup d'espace blanc = propreté.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Bonnes pratiques</div><div class="do-item"><span>→</span> Texte lisible, taille généreuse</div><div class="do-item"><span>→</span> Accessibilité WCAG AAA</div><div class="do-item"><span>→</span> Informations claires et hiérarchisées</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Rouge dominant (anxiété)</div><div class="do-item"><span>→</span> Polices trop petites</div><div class="do-item"><span>→</span> Visuels choquants ou anxiogènes</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- BTP -->
+  <div id="ind-btp" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏗 BTP & Artisanat</div><div style="font-size:12px;color:var(--text2);">Construction · Plomberie · Électricité · Menuiserie</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Oswald</span><span class="pill primary">Barlow Condensed</span><span class="pill secondary">Roboto</span><span class="pill secondary">Source Sans Pro</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Polices condensées bold = force, efficacité. Lisibles à distance (panneaux, véhicules). Impact immédiat.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#f4a261"></div> Orange vif</div><div class="swatch-chip"><div class="swatch-dot" style="background:#1d3557"></div> Bleu marine</div><div class="swatch-chip"><div class="swatch-dot" style="background:#e9c46a"></div> Jaune</div><div class="swatch-chip"><div class="swatch-dot" style="background:#2c2c2c"></div> Anthracite</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Orange/jaune = énergie, chantier, sécurité. Bleu = fiabilité, expertise. Contraste fort = visibilité.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Direct, solide, efficace. Pas de fioritures. Photos de réalisations concrètes. Le client veut voir du travail bien fait, pas de l'art.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Bonnes pratiques</div><div class="do-item"><span>→</span> Mettre les réalisations en avant</div><div class="do-item"><span>→</span> Numéro de téléphone très visible</div><div class="do-item"><span>→</span> Logo reconnaissable sur véhicule</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Design trop raffiné / décoratif</div><div class="do-item"><span>→</span> Polices légères peu lisibles</div><div class="do-item"><span>→</span> Couleurs trop pastel (manque d'impact)</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- LUXE -->
+  <div id="ind-luxe" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🏨 Luxe & Hôtellerie</div><div style="font-size:12px;color:var(--text2);">Hôtel · Resort · Gastronomie · Prestige</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Didot</span><span class="pill primary">Cormorant Garamond</span><span class="pill secondary">Optima</span><span class="pill secondary">Garamond</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Serif à forts contrastes (Didot, Bodoni) = prestige absolu. Jamais de bold agressif. Finesse = luxe.</div>
+          <div class="pill-group" style="margin-top:6px;"><span class="pill avoid">❌ Toute police "fun"</span><span class="pill avoid">❌ Condensed bold</span></div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#000000"></div> Noir absolu</div><div class="swatch-chip"><div class="swatch-dot" style="background:#c9a53a"></div> Or 18 carats</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f5f5f0"></div> Ivoire</div><div class="swatch-chip"><div class="swatch-dot" style="background:#8b7355"></div> Bronze</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Noir + Or = combo luxe universel. Ivoire / crème = raffinement. Argent = luxe contemporain. Jamais de couleurs criardes.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Minimalisme absolu. Beaucoup d'espace blanc. Photos ultra-léchées. Le luxe, c'est ce qu'on ne montre PAS. Moins = plus.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Four Seasons (or, sobriété)</div><div class="do-item"><span>→</span> Hermès (orange, serif fine)</div><div class="do-item"><span>→</span> Ritz Paris (crème, élégance)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Trop d'éléments décoratifs</div><div class="do-item"><span>→</span> Couleurs saturées</div><div class="do-item"><span>→</span> Police sans-serif générique</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- TECH -->
+  <div id="ind-tech" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">💻 Tech & Startup</div><div style="font-size:12px;color:var(--text2);">SaaS · App · Agence digitale · Innovation</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Satoshi</span><span class="pill primary">Plus Jakarta Sans</span><span class="pill secondary">DM Sans</span><span class="pill secondary">Syne</span><span class="pill secondary">Space Grotesk</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Sans-serif géométriques modernes. Caractère fort, contemporain. Éviter les classiques trop vus (Inter, Roboto).</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#6366f1"></div> Indigo</div><div class="swatch-chip"><div class="swatch-dot" style="background:#0f172a"></div> Dark navy</div><div class="swatch-chip"><div class="swatch-dot" style="background:#22d3ee"></div> Cyan</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f8fafc"></div> Off-white</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Dark mode = tendance tech forte. Dégradés subtils autorisés. Couleurs vives sur fond sombre = impact digital.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Moderne, audacieux, dynamique. Grilles asymétriques acceptées. Animations si digital. Maquettes de produit en contexte réel.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Linear (dark, minimaliste)</div><div class="do-item"><span>→</span> Stripe (clean, professionnel)</div><div class="do-item"><span>→</span> Vercel (noir/blanc, impactant)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Design trop "corporate" / vieillot</div><div class="do-item"><span>→</span> Couleurs trop sages</div><div class="do-item"><span>→</span> Polices serif traditionnelles</div></div></div></div>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div id="ind-education" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">🎓 Éducation & Formation</div><div style="font-size:12px;color:var(--text2);">École · Université · Formation pro · Coaching</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Nunito</span><span class="pill primary">Poppins</span><span class="pill secondary">Open Sans</span><span class="pill secondary">Quicksand</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Polices rondes et accessibles = approchable et bienveillant. Bien lisibles à toutes les tailles.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#3b82f6"></div> Bleu vif</div><div class="swatch-chip"><div class="swatch-dot" style="background:#f59e0b"></div> Jaune/Ambre</div><div class="swatch-chip"><div class="swatch-dot" style="background:#10b981"></div> Vert</div><div class="swatch-chip"><div class="swatch-dot" style="background:#ffffff;border:1px solid #ddd"></div> Blanc</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Couleurs vives mais harmonieuses. Inspirer la curiosité et l'énergie positive.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Dynamique, optimiste, inclusif. Iconographie claire. Photos diversifiées de personnes en apprentissage. Mise en page structurée mais pas rigide.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPORT -->
+  <div id="ind-sport" class="industry-detail">
+    <button class="back-btn" onclick="hideIndustry()">← Retour</button>
+    <div class="card">
+      <div class="card-header"><div class="card-title">⚡ Sport & Fitness</div><div style="font-size:12px;color:var(--text2);">Salle de sport · Coach · Événement sportif</div></div>
+      <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+        <div class="spec-row"><div class="spec-icon">🔤</div><div class="spec-content"><div class="spec-title">Typographies recommandées</div>
+          <div class="pill-group"><span class="pill primary">Bebas Neue</span><span class="pill primary">Barlow Condensed</span><span class="pill secondary">Oswald Bold</span><span class="pill secondary">Anton</span></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Condensed bold = énergie, puissance, impact. Caps très utilisées. Jamais de serif ou de polices légères.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">🎨</div><div class="spec-content"><div class="spec-title">Palette</div>
+          <div class="swatch-row"><div class="swatch-chip"><div class="swatch-dot" style="background:#ff3b30"></div> Rouge vif</div><div class="swatch-chip"><div class="swatch-dot" style="background:#000000"></div> Noir</div><div class="swatch-chip"><div class="swatch-dot" style="background:#ff9500"></div> Orange</div><div class="swatch-chip"><div class="swatch-dot" style="background:#ffffff;border:1px solid #ddd"></div> Blanc</div></div>
+          <div style="font-size:12px;color:var(--text2);margin-top:8px;">Noir + rouge = puissance et adrénaline. Orange = énergie. Contrastes extrêmes = impact maximal.</div>
+        </div></div>
+        <div class="spec-row"><div class="spec-icon">✨</div><div class="spec-content"><div class="spec-title">Ton visuel</div><div class="spec-desc">Agressif, énergique, motivant. Photos d'action dynamiques. Diagonales et angles dans la mise en page. Textures grunge ou béton acceptées.</div></div></div>
+      </div>
+      <div class="card-footer"><div class="do-dont"><div class="do-card do"><div class="do-label">✅ Références</div><div class="do-item"><span>→</span> Nike (noir/blanc, impactant)</div><div class="do-item"><span>→</span> UFC (rouge/noir, agressif)</div><div class="do-item"><span>→</span> Red Bull (dynamique, angles)</div></div><div class="do-card dont"><div class="do-label">❌ Erreurs</div><div class="do-item"><span>→</span> Couleurs pastels ou douces</div><div class="do-item"><span>→</span> Polices serif élégantes</div><div class="do-item"><span>→</span> Mise en page statique / centrée</div></div></div></div>
+    </div>
+  </div>
+
+  </div><!-- /industry-detail-wrap -->
+</div><!-- /page-industry -->
+
+
+<!-- ══════════════════════════════════════════════
+     CHECKLISTS
+══════════════════════════════════════════════ -->
+
+<!-- FLYER -->
+<div id="page-flyer" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div><div class="card-title">📄 Checklist Flyer</div><div style="font-size:12px;color:var(--text2);margin-top:2px;" id="flyer-label">0 / 0 complété</div></div>
+      <button class="reset-btn" onclick="resetTab('flyer')">↺ Reset</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="flyer-bar" style="background:var(--orange)"></div></div>
+    <div class="sec-label">📋 Contenu</div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Titre accrocheur — Display ou H1</div><div class="id">Message principal court, percutant, lisible en 2 secondes</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Sous-titre / accroche — H2</div><div class="id">Détail ou bénéfice clé, 1–2 lignes max</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Informations essentielles</div><div class="id">Date, lieu, horaire, prix — tout ce que le lecteur doit retenir</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Call to action (CTA)</div><div class="id">URL, QR code, numéro de téléphone, lien réseaux sociaux</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Logo & identité de marque</div><div class="id">Logo vectoriel haute résolution (AI/EPS/SVG)</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="sec-label">🎨 Visuels & Design</div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Format — A5 (148×210mm) ou A4</div><div class="id">Fond perdu 3mm pour impression · Vérifier dimensions imprimeur</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Hiérarchie typographique</div><div class="id">Titre ≥32px · Sous-titre 20–24px · Corps 14–16px · Max 2 polices</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Palette — règle 60-30-10</div><div class="id">60% dominante · 30% secondaire · 10% accent · Max 4 couleurs</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Image / visuel fort — 300 dpi min</div><div class="id">Print 300dpi · Digital PNG/WebP 72dpi · Libre de droits</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Contraste WCAG ≥ 4.5:1</div><div class="id">Texte toujours lisible — vérifier avec Colour Contrast Analyser</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Grille 4 col · Zone sécurité 5mm</div><div class="id">Espacement base 8px · Marges 10mm · Gouttière 5mm</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'flyer')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Mode CMJN — export PDF haute res</div><div class="id">Convertir RGB → CMJN · PDF/X-1a pour imprimeur</div></div><span class="itag t-t">Technique</span></div>
+    <div class="card-footer"><div class="tools-bar"><div class="tool-badge">🖥 Illustrator</div><div class="tool-badge">🖼 Photoshop</div><div class="tool-badge">✦ Figma</div></div></div>
+  </div>
+</div>
+
+<!-- BROCHURE -->
+<div id="page-brochure" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div><div class="card-title">📖 Checklist Brochure</div><div style="font-size:12px;color:var(--text2);margin-top:2px;" id="brochure-label">0 / 0 complété</div></div>
+      <button class="reset-btn" onclick="resetTab('brochure')">↺ Reset</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="brochure-bar" style="background:var(--teal)"></div></div>
+    <div class="sec-label">📋 Contenu</div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Couverture percutante</div><div class="id">Titre (Display/H1), visuel fort, logo — premier contact avec le lecteur</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Structure narrative claire</div><div class="id">Introduction → Contenu → Conclusion / CTA</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Textes validés & relus</div><div class="id">Contenu approuvé client — zéro faute</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Contacts & mentions légales</div><div class="id">Adresse, site web, mentions obligatoires si requis</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="sec-label">🎨 Visuels & Design</div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Format de pliage défini</div><div class="id">Tri-fold · Bi-fold · Z-fold — dimensions vérifiées imprimeur</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Grille 4–6 colonnes — alignements stricts</div><div class="id">Gouttières cohérentes sur toutes les pages</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Hiérarchie typographique constante</div><div class="id">H1 24px · H2 18–20px · Corps 12–14pt · même style toutes pages</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Images 300 dpi · libres de droits</div><div class="id">Vérifier licence avant usage commercial</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Mode CMJN — profil ICC imprimeur</div><div class="id">Convertir en CMJN · demander le profil couleur à l'imprimeur</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'brochure')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Fond perdu 3mm · zone sécurité 5mm</div><div class="id">Pour tous les éléments importants proches des bords</div></div><span class="itag t-t">Technique</span></div>
+    <div class="card-footer"><div class="tools-bar"><div class="tool-badge">🖥 Illustrator</div><div class="tool-badge">🖼 Photoshop</div></div></div>
+  </div>
+</div>
+
+<!-- CARTE VISITE -->
+<div id="page-carte" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div><div class="card-title">💳 Carte de Visite</div><div style="font-size:12px;color:var(--text2);margin-top:2px;" id="carte-label">0 / 0 complété</div></div>
+      <button class="reset-btn" onclick="resetTab('carte')">↺ Reset</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="carte-bar" style="background:var(--green)"></div></div>
+    <div class="sec-label">📋 Contenu</div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Nom complet & titre / poste</div><div class="id">Prénom Nom — Fonction officielle</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Coordonnées complètes</div><div class="id">Téléphone, email, site web, adresse si nécessaire</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Logo vectoriel de l'entreprise</div><div class="id">SVG/EPS/AI — pas de pixellisation possible</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Réseaux sociaux / QR code</div><div class="id">LinkedIn, Instagram ou QR code vers portfolio/site</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="sec-label">🎨 Visuels & Design</div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Format 85×55mm · fond perdu 2mm</div><div class="id">Standard Europe · zone de sécurité 3mm</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Typo petit format — police claire</div><div class="id">Nom 11–14pt · Titre 9–10pt · Coord. 7–9pt · non condensée</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Recto / verso structuré</div><div class="id">Recto : identité visuelle · Verso : coordonnées ou message</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Grille 3 col · espacement 4mm min</div><div class="id">Aucun élément ne touche les bords · respiration suffisante</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'carte')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">CMJN · finition prévue</div><div class="id">Vernis UV · dorure · pelliculage mat/brillant selon positionnement</div></div><span class="itag t-t">Technique</span></div>
+    <div class="card-footer"><div class="tools-bar"><div class="tool-badge">🖥 Illustrator</div><div class="tool-badge">✦ Figma</div></div></div>
+  </div>
+</div>
+
+<!-- FIDÉLITÉ -->
+<div id="page-fidelite" class="page">
+  <div class="card">
+    <div class="card-header">
+      <div><div class="card-title">⭐ Carte de Fidélité</div><div style="font-size:12px;color:var(--text2);margin-top:2px;" id="fidelite-label">0 / 0 complété</div></div>
+      <button class="reset-btn" onclick="resetTab('fidelite')">↺ Reset</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="fidelite-bar" style="background:var(--purple)"></div></div>
+    <div class="sec-label">📋 Contenu</div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Nom de l'enseigne & logo</div><div class="id">Identité de marque clairement visible au recto</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Nombre de cases / tampons défini</div><div class="id">Combien de points / tampons pour déclencher la récompense</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Description claire de l'offre</div><div class="id">"10ème café offert" · "-20% dès 5 achats" — bien mis en valeur</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Conditions d'utilisation</div><div class="id">Date d'expiration, restrictions — verso en légende 7–8pt</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Coordonnées & contact</div><div class="id">Adresse, site web ou app si programme digital associé</div></div><span class="itag t-c">Contenu</span></div>
+    <div class="sec-label">🎨 Visuels & Design</div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Format 85.6×54mm · fond perdu 2mm</div><div class="id">Standard carte bancaire · zone sécurité 3mm</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Cases tampons bien dimensionnées</div><div class="id">Min 8×8mm · cohérentes avec l'identité de marque</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Hiérarchie typo claire</div><div class="id">Enseigne 12–14pt · Offre 10–12pt · Conditions 7–8pt · 1–2 polices</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Identité visuelle forte & mémorable</div><div class="id">Couleurs de marque dominantes — reconnaissable immédiatement</div></div><span class="itag t-v">Visuel</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">QR code min 2×2cm si digital</div><div class="id">Taille minimum pour être scannable par téléphone</div></div><span class="itag t-t">Technique</span></div>
+    <div class="check-item" onclick="toggle(this,'fidelite')"><div class="cb"><span class="cb-tick">✓</span></div><div class="it"><div class="il">Carton 350g · finition adaptée</div><div class="id">Plastification mat ou brillant — durabilité assurée</div></div><span class="itag t-t">Technique</span></div>
+    <div class="card-footer"><div class="tools-bar"><div class="tool-badge">🖥 Illustrator</div><div class="tool-badge">✦ Figma</div></div></div>
+  </div>
+</div>
+
+<script>
+const state = JSON.parse(localStorage.getItem('dsp-v4') || '{}');
+
+function getItems(tabId) { return document.querySelectorAll(`#page-${tabId} .check-item`); }
+
+function updateProgress(tabId) {
+  const items = getItems(tabId);
+  const checked = document.querySelectorAll(`#page-${tabId} .check-item.checked`).length;
+  const total = items.length;
+  const pct = total ? (checked / total) * 100 : 0;
+  const bar = document.getElementById(`${tabId}-bar`);
+  const label = document.getElementById(`${tabId}-label`);
+  if (bar) bar.style.width = pct + '%';
+  if (label) label.textContent = `${checked} / ${total} complété${checked>1?'s':''}`;
+}
+
+function toggle(el, tabId) {
+  el.classList.toggle('checked');
+  const items = Array.from(getItems(tabId));
+  const idx = items.indexOf(el);
+  if (!state[tabId]) state[tabId] = {};
+  state[tabId][idx] = el.classList.contains('checked');
+  localStorage.setItem('dsp-v4', JSON.stringify(state));
+  updateProgress(tabId);
+}
+
+function resetTab(tabId) {
+  getItems(tabId).forEach(i => i.classList.remove('checked'));
+  state[tabId] = {};
+  localStorage.setItem('dsp-v4', JSON.stringify(state));
+  updateProgress(tabId);
+}
+
+function gotoPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelector(`[onclick="gotoPage('${id}')"]`).classList.add('active');
+}
+
+function showIndustry(id) {
+  document.getElementById('industry-selector').style.display = 'none';
+  document.querySelectorAll('.industry-detail').forEach(d => d.classList.remove('active'));
+  document.getElementById('ind-' + id).classList.add('active');
+}
+
+function hideIndustry() {
+  document.querySelectorAll('.industry-detail').forEach(d => d.classList.remove('active'));
+  document.getElementById('industry-selector').style.display = 'block';
+}
+
+// Restore state
+['flyer','brochure','carte','fidelite'].forEach(tabId => {
+  if (state[tabId]) {
+    const items = Array.from(getItems(tabId));
+    Object.entries(state[tabId]).forEach(([idx, checked]) => {
+      if (checked && items[idx]) items[idx].classList.add('checked');
+    });
+  }
+  updateProgress(tabId);
+});
+</script>
+</body>
+</html>
